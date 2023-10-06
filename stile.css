@@ -144,3 +144,9 @@ button{
 #stat > div > div:first-child{
     font-weight: bold;
 }
+
+.menuAttivo{
+    cursor: pointer;
+    text-decoration: underline;
+    color: yellow;
+}

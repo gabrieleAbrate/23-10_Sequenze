@@ -12,3 +12,38 @@
     6.2) Cliccando sul bottone inserisci è necessario inserire la nuova sequenza su db
 
 */
+
+'use strict'
+let baseURL = window.location.href;
+
+window.onload = () => {
+    evidenziaMenu();
+    baseURL = checkURL('nuovo.html');
+    console.log(baseURL);
+
+    let bloccoInput = document.querySelectorAll('#sequenzaGiusta input');
+    bloccoInput.forEach((input) => {
+        let idInput = input.id.split('')[input.id.length - 1];
+        input.addEventListener('paste', (e) => {
+            let immagine = e.clipboardData.getData('text');
+            let img = document.getElementById('img' + idInput);
+            img.setAttribute('src', immagine);
+        });
+    });
+
+    let btnInserisci = document.getElementById('btnInserisci');
+    btnInserisci.addEventListener('click', async () => {
+        let sequenza = [];
+        bloccoInput.forEach((input) => {
+            if(input.value != '') sequenza.push(input.value);
+        });
+        let tema = document.getElementById('txtTitolo').value;
+        console.log(sequenza);
+        let busta = await fetch(baseURL + 'server/nuovaSequenza.php', {
+            method: 'POST',
+            body: JSON.stringify({sequenza, tema})
+        });
+        busta = await busta.json();
+        console.log(busta);
+    });
+}

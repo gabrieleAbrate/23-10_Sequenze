@@ -11,3 +11,16 @@
     5.3) Mostrare in modo dinamico i progressi come da esempio
         
 */
+
+window.onload = () => {
+    evidenziaMenu();
+    // creazione dinamica di un elemento
+    let div = `<div>
+                <div>` + localStorage.getItem('tema') + `</div>
+                <div>` + localStorage.getItem('tempo') + `</div>
+                <div> ` + localStorage.getItem('sequenze') + `</div>
+                <div>Giorno: ` + new Date().toLocaleDateString(); +`</div>
+            </div>`;
+    bloccoDiv = document.getElementById('stat');
+    bloccoDiv.innerHTML += div;
+}
